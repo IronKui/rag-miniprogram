@@ -1,0 +1,82 @@
+/* pages/login/login.wxss */
+.auth-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 60rpx 48rpx;
+  background: var(--bg);
+}
+
+.auth-card {
+  width: 100%;
+  background: var(--surface);
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 64rpx 48rpx 48rpx;
+  box-shadow: 0 8rpx 28rpx rgba(0, 0, 0, 0.06);
+}
+
+.brand {
+  font-size: 44rpx;
+  font-weight: 650;
+  letter-spacing: 1rpx;
+  text-align: center;
+}
+
+.subtitle {
+  margin-top: 12rpx;
+  margin-bottom: 40rpx;
+  font-size: 25rpx;
+  color: var(--text-3);
+  text-align: center;
+}
+
+.auth-error {
+  background: #fef2f2;
+  border: 2rpx solid #fecaca;
+  color: var(--danger);
+  font-size: 25rpx;
+  line-height: 1.6;
+  padding: 18rpx 22rpx;
+  border-radius: var(--radius-sm);
+  margin-bottom: 24rpx;
+}
+
+.field {
+  margin-bottom: 28rpx;
+}
+
+.label {
+  display: block;
+  font-size: 25rpx;
+  color: var(--text-2);
+  margin-bottom: 12rpx;
+}
+
+.input {
+  width: 100%;
+  height: 88rpx;
+  padding: 0 24rpx;
+  background: var(--surface-2);
+  border: 2rpx solid var(--border);
+  border-radius: var(--radius);
+  font-size: 29rpx;
+  color: var(--text);
+}
+
+.ph {
+  color: var(--text-3);
+}
+
+.auth-switch {
+  margin-top: 32rpx;
+  text-align: center;
+  font-size: 25rpx;
+  color: var(--text-3);
+}
+
+.auth-switch .link {
+  color: var(--primary);
+  margin-left: 10rpx;
+}

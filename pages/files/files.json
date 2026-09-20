@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "知识库",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
+}

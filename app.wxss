@@ -1,0 +1,105 @@
+/**app.wxss
+ * 设计变量与后端 chat.html 保持一致（现代 SaaS · 浅灰底 / 白色卡片 / 靛蓝点缀）
+ */
+page {
+  --bg:            #fafafa;
+  --surface:       #ffffff;
+  --surface-2:     #f4f4f5;
+  --surface-3:     #ebebed;
+  --border:        #e4e4e7;
+  --border-strong: #d4d4d8;
+
+  --text:          #18181b;
+  --text-2:        #52525b;
+  --text-3:        #a1a1aa;
+
+  --primary:       #6366f1;
+  --primary-hover: #4f46e5;
+  --primary-soft:  #eef2ff;
+
+  --danger:        #ef4444;
+  --success:       #10b981;
+
+  --radius-sm: 8rpx;
+  --radius:    16rpx;
+  --radius-lg: 24rpx;
+
+  background: var(--bg);
+  color: var(--text);
+  font-size: 28rpx;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  height: 100%;
+}
+
+view, text, input, textarea, button, scroll-view {
+  box-sizing: border-box;
+}
+
+/* 撑满屏幕的纵向布局容器 */
+.screen {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* 通用按钮复位（小程序 button 默认样式较重） */
+button {
+  padding: 0;
+  margin: 0;
+  font-size: inherit;
+  line-height: normal;
+  background: transparent;
+  border-radius: 0;
+}
+button::after {
+  border: none;
+}
+
+/* 主按钮 */
+.btn-primary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #fff;
+  font-size: 30rpx;
+  font-weight: 550;
+  border-radius: var(--radius);
+  height: 88rpx;
+}
+.btn-primary.disabled {
+  background: var(--surface-3);
+  color: var(--text-3);
+}
+
+/* 小图标按钮 */
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+  font-size: 34rpx;
+  width: 64rpx;
+  height: 64rpx;
+  border-radius: var(--radius-sm);
+}
+
+/* 空状态 */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 60rpx;
+  color: var(--text-3);
+}
+.empty-state .icon {
+  font-size: 56rpx;
+  color: var(--border-strong);
+  margin-bottom: 24rpx;
+}
+.empty-state .hint {
+  font-size: 26rpx;
+  line-height: 1.7;
+  text-align: center;
+}

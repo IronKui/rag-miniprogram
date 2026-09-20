@@ -1,0 +1,38 @@
+<!--pages/login/login.wxml-->
+<view class="auth-page">
+  <view class="auth-card">
+    <view class="brand">AI 知识库</view>
+    <view class="subtitle">企业级 RAG 知识库问答系统</view>
+
+    <view class="auth-error" wx:if="{{error}}">{{error}}</view>
+
+    <!-- 登录 / 注册共用一套输入框，用 wx:if 区分 -->
+    <view class="field">
+      <text class="label">用户名</text>
+      <input class="input" type="text" value="{{username}}" data-field="username"
+        bindinput="onInput" placeholder="请输入用户名" placeholder-class="ph" />
+    </view>
+
+    <view class="field">
+      <text class="label">密码</text>
+      <input class="input" password value="{{password}}" data-field="password"
+        bindinput="onInput" placeholder="{{isRegister ? '请输入密码（至少 6 位）' : '请输入密码'}}"
+        placeholder-class="ph" />
+    </view>
+
+    <view class="field" wx:if="{{isRegister}}">
+      <text class="label">昵称（可选）</text>
+      <input class="input" type="text" value="{{nickname}}" data-field="nickname"
+        bindinput="onInput" placeholder="展示昵称" placeholder-class="ph" />
+    </view>
+
+    <view class="btn-primary {{submitting ? 'disabled' : ''}}" bindtap="onSubmit">
+      {{submitting ? '处理中…' : (isRegister ? '注册' : '登录')}}
+    </view>
+
+    <view class="auth-switch">
+      <text>{{isRegister ? '已有账号？' : '还没有账号？'}}</text>
+      <text class="link" bindtap="toggleMode">{{isRegister ? '立即登录' : '立即注册'}}</text>
+    </view>
+  </view>
+</view>

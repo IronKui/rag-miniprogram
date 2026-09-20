@@ -1,0 +1,76 @@
+<!--pages/chat/chat.wxml-->
+<view class="screen">
+  <!-- 顶部：会话标题 + 模式 -->
+  <view class="topbar">
+    <view class="topbar-left" bindtap="openDrawer">
+      <text class="menu-icon">☰</text>
+      <text class="title">{{currentTitle}}</text>
+    </view>
+    <view class="mode-chip" bindtap="pickMode">{{modeName}}</view>
+  </view>
+
+  <!-- 消息区 -->
+  <scroll-view class="messages" scroll-y scroll-with-animation scroll-into-view="{{scrollIntoView}}">
+    <view wx:if="{{messages.length === 0 && !loading}}" class="empty-state">
+      <view class="icon">◆</view>
+      <view class="hint">上传文档或输入问题，开始使用知识库</view>
+    </view>
+
+    <view wx:for="{{messages}}" wx:key="id" id="msg-{{item.id}}" class="row {{item.role}}">
+      <view class="bubble" bindlongpress="onMessageLongPress" data-content="{{item.content}}">
+        <text user-select>{{item.content}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" id="loading-{{loadSeq}}" class="row assistant">
+      <view class="bubble loading">{{loadingText}}</view>
+    </view>
+
+    <view class="bottom-pad"></view>
+  </scroll-view>
+
+  <!-- 待上传的文件。textarea 是原生组件、会在抽屉之上，所以抽屉打开时整个输入区先移除 -->
+  <block wx:if="{{!drawerOpen}}">
+    <view class="file-bar" wx:if="{{pendingFile}}">
+      <view class="file-chip">{{pendingFile.name}} · {{pendingSizeText}}</view>
+      <picker range="{{scopeNames}}" value="{{scopeIndex}}" bindchange="onScopeChange">
+        <view class="scope-picker">{{scopeNames[scopeIndex]}} ▾</view>
+      </picker>
+      <view class="file-cancel" bindtap="cancelFile">取消</view>
+    </view>
+
+    <view class="input-area">
+      <view class="input-box">
+        <view class="attach-btn" bindtap="onChooseFile">＋</view>
+        <textarea class="input" value="{{inputValue}}" bindinput="onInput" auto-height
+          maxlength="-1" placeholder="输入你的问题…" placeholder-class="ph"
+          confirm-type="send" bindconfirm="send" show-confirm-bar="{{true}}" />
+        <view class="send-btn {{loading ? 'disabled' : ''}}" bindtap="send">发送</view>
+      </view>
+    </view>
+  </block>
+</view>
+
+<!-- 会话抽屉 -->
+<view class="mask {{drawerOpen ? 'show' : ''}}" bindtap="closeDrawer"></view>
+<view class="drawer {{drawerOpen ? 'open' : ''}}">
+  <view class="drawer-header">
+    <view class="drawer-user">{{userName}}</view>
+    <view class="drawer-close" bindtap="closeDrawer">✕</view>
+  </view>
+
+  <view class="new-chat-btn" bindtap="newChat">＋ 新建会话</view>
+
+  <scroll-view class="drawer-list" scroll-y>
+    <view wx:if="{{sessions.length === 0}}" class="drawer-empty">还没有会话，发一条消息即可创建</view>
+
+    <view wx:for="{{sessions}}" wx:key="id"
+      class="session-item {{item.id === currentSessionId ? 'active' : ''}}"
+      data-id="{{item.id}}" bindtap="onSessionTap">
+      <text class="session-title">{{item.title}}</text>
+      <view class="session-menu" data-id="{{item.id}}" catchtap="onSessionMenu">⋯</view>
+    </view>
+  </scroll-view>
+
+  <view class="drawer-footer" bindtap="logout">退出登录</view>
+</view>

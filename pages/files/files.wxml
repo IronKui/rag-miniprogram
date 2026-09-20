@@ -1,0 +1,41 @@
+<!--pages/files/files.wxml-->
+<view class="screen">
+  <view class="header">
+    <view class="header-left">
+      <view class="header-title">知识库文件</view>
+      <view class="header-sub">{{userName}} · 账号级共享</view>
+    </view>
+    <view class="upload-btn {{uploading ? 'disabled' : ''}}" bindtap="onUpload">
+      {{uploading ? '上传中' : '＋ 上传'}}
+    </view>
+  </view>
+
+  <scroll-view class="list" scroll-y>
+    <view wx:if="{{files.length === 0 && !loading}}" class="empty-state">
+      <view class="icon">◆</view>
+      <view class="hint">还没有文件</view>
+      <view class="hint">上传 PDF / DOCX / MD / TXT 后即可开始提问</view>
+      <view class="btn-primary empty-btn" bindtap="onUpload">上传第一个文件</view>
+    </view>
+
+    <view wx:for="{{files}}" wx:key="id" class="file-item">
+      <view class="file-icon">◆</view>
+      <view class="file-main">
+        <view class="file-name">{{item.filename}}</view>
+        <view class="file-meta">
+          <text>{{item.sizeText}}</text>
+          <text class="dot">·</text>
+          <text>{{item.chunkCount}} 块</text>
+          <text class="dot">·</text>
+          <text>{{item.scopeText}}</text>
+        </view>
+        <view class="file-time">{{item.timeText}}</view>
+      </view>
+      <view class="delete-btn" data-id="{{item.id}}" data-name="{{item.filename}}" bindtap="onDelete">✕</view>
+    </view>
+
+    <view class="bottom-pad"></view>
+  </scroll-view>
+
+  <view class="footer-hint">删除文件会同时清除其向量数据</view>
+</view>
